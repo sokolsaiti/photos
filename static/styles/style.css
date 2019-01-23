@@ -1,0 +1,62 @@
+body {
+    background-color: rgb(250, 250, 250)
+}
+
+.clearfix {
+    clear: both;
+}
+
+#container {
+    width: 85%;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.image {
+
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+    margin-bottom: 40px;
+
+
+}
+
+.directLink {
+    font-size: 10px;
+    bottom: -5px;
+    left: 0px;
+    width: 100%;
+    text-align: right;
+    letter-spacing: .2px;
+    font-family: sans-serif;
+}
+
+.title {
+    color: brown;
+    font-family: sans-serif;
+    float: left;
+    font-size: 25px;
+
+
+    font-weight: bold;
+}
+
+.pager {
+    float: right;
+    font-family: sans-serif;
+}
+
+footer {
+    font-size: 10px;
+}
+
+img {
+    width: 100%;
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}

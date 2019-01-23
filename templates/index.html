@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <title>Sokol Saiti - Photos</title>
+    <meta property="og:title" content="Sokol Saiti"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://photos.sokol.saiti.io/"/>
+    <meta property="og:image" content="http://photos.sokol.saiti.io/avatar.png"/>
+    <meta property="og:description" content="Sokol Saiti's photos."/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', file_name='/styles/style.css') }}">
+</head>
+<body>
+<div id="container">
+    <div id="head"><span class="title">photos.sokol</span>
+        <div class="pager">Prev · Home · <a href="/?p={{ increment .CurrentPage }}"> Next </a></div>
+        <div class="clearfix"></div>
+    </div>
+    <br/> {% range .FileNames %}
+    <div class="image"><img src="photos/{{ . }}">
+        <h3 class="directLink"><span> <a href="photos/{{ . }}">{{ . }}</a> </span></h3></div>
+    {{ end }}
+    <footer>
+        <hr/>
+        Copyright Sokol Saiti
+    </footer>
+</div>
+</body>
+</html>
+
