@@ -1,10 +1,16 @@
+import getpass
+import os
 import sqlite3
 
 from flask import Flask, g
 
 DATABASE = 'database.db'
+UPLOAD_DIR = '/home/' + getpass.getuser() + '/uploads/photos'
 
 app = Flask(__name__)
+
+if not os.path.exists(UPLOAD_DIR):
+    os.makedirs(UPLOAD_DIR)
 
 
 @app.route('/<int:page>')
@@ -41,6 +47,9 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
+
+def collect_uploads():
+    pass
 
 if __name__ == '__main__':
     app.run()
