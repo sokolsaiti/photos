@@ -8,18 +8,20 @@
     <meta property="og:url" content="http://photos.sokol.saiti.io/"/>
     <meta property="og:image" content="http://photos.sokol.saiti.io/avatar.png"/>
     <meta property="og:description" content="Sokol Saiti's photos."/>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', file_name='/styles/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 <div id="container">
     <div id="head"><span class="title">photos.sokol</span>
-        <div class="pager">Prev · Home · <a href="/?p={{ increment .CurrentPage }}"> Next </a></div>
+        <div class="pager"><a href="#"> Previous </a> · <a href="/"> Home </a> · <a href="#"> Next </a></div>
         <div class="clearfix"></div>
     </div>
-    <br/> {% range .FileNames %}
-    <div class="image"><img src="photos/{{ . }}">
-        <h3 class="directLink"><span> <a href="photos/{{ . }}">{{ . }}</a> </span></h3></div>
-    {{ end }}
+    <br/> {% for photo in photo_list %}
+    <div class="image"><img src="{{ url_for('static', filename='photos/' + photo[0]|string +'.JPG') }}">
+        <h3 class="directLink"><span> <a
+                href="{{ url_for('static', filename='photos/' + photo[0]|string +'.JPG') }}">{{ photo[0]|string +'.JPG' }}</a> </span>
+        </h3></div>
+{% endfor %}
     <footer>
         <hr/>
         Copyright Sokol Saiti
