@@ -1,9 +1,10 @@
 import os
 import sqlite3
 
-from flask import Flask, g, render_template, send_from_directory
+from flask import Flask, g, render_template, send_from_directory, redirect
 
 DATABASE = 'photo_repository.db'
+BASE_URL = 'http://photos.sokol.saiti.io'
 # UPLOAD_DIR = '/home/' + getpass.getuser() + '/uploads/photos'
 UPLOAD_DIR = 'uploads/photos'
 PHOTO_DIR = 'static/photos'
@@ -28,12 +29,16 @@ def send_css(path):
 @app.route('/')
 @app.route('/<int:page>')
 def hello_world(page=1):
-    return render_template('index.html', photo_list=get_photos(page_size=PAGE_SIZE, page=page - 1))
+    photos = get_photos(page_size=PAGE_SIZE, page=page - 1)
+    if len(photos) > 0:
+        return render_template('index.html', base_url=BASE_URL, photo_list=photos)
+    else:
+        return redirect('/')
 
 
-@app.route('/test')
-def test_hello():
-    return 'Hello Test.'
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
 
 
 def get_db():

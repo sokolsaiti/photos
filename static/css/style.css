@@ -13,12 +13,10 @@ body {
 }
 
 .image {
-
+    margin-bottom: 40px;
     border-radius: 3px;
     border: 1px solid #e6e6e6;
-    margin-bottom: 40px;
-
-
+    padding: 5px;
 }
 
 .directLink {
@@ -31,19 +29,35 @@ body {
     font-family: sans-serif;
 }
 
+
+.directLink a {
+    background: rgba(246, 8, 18, 0.7);
+    padding: 3px;
+    color: cornsilk;
+}
+
 .title {
-    color: brown;
-    font-family: sans-serif;
+    color: rgba(246, 8, 18, 0.7);
+    font-family: Georgia, serif;
     float: left;
     font-size: 25px;
-
-
     font-weight: bold;
 }
 
 .pager {
     float: right;
-    font-family: sans-serif;
+    font-family: Georgia, serif;
+}
+
+.pager a, pager a:visited {
+    text-decoration: none;
+    padding: 3px;
+
+}
+
+.pager a:hover {
+    background: rgba(246, 8, 18, 0.7);
+    color: cornsilk;
 }
 
 footer {
@@ -59,4 +73,8 @@ hr {
     height: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.kujeti {
+    margin: auto;
 }
