@@ -34,6 +34,7 @@ body {
     background: rgba(246, 8, 18, 0.7);
     padding: 3px;
     color: cornsilk;
+    font-weight: bold;
 }
 
 .title {

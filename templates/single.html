@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div><span class="title">Sokol Saiti • Photos</span>
+        <div class="pager">
+            <a href="/"> Home </a>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <br/>
+
+    {% for photo in photo_list %}
+        <div class="image"><img src="{{ url_for('static', filename='photos/' + photo[0]|string +'.JPG') }}">
+            <h3 class="directLink"><span> <a
+                    href="{{ url_for('static', filename='photos/' + photo[0]|string +'.JPG') }}"># {{ photo[0]|string }}</a> </span>
+            </h3>
+        </div>
+    {% endfor %}
+
+    <footer>
+        <hr/>
+        &copy; Sokol Saiti
+    </footer>
+
+{% endblock %}

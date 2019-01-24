@@ -1,19 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div id="head"><span class="title">photos.sokol</span>
-        <div class="pager"><a href="#"> Previous </a> · <a href="/"> Home </a> · <a href="#"> Next </a></div>
+    <div id="head"><span class="title">Sokol Saiti • Photos</span>
+        <div class="pager">
+            {% if has_previous_page %}
+                <a href="/{{ current_page - 1 }}"> Previous </a>
+            {% else %}
+                <a href=""> Previous </a>
+            {% endif %}
+            ·
+            <a href="/"> Home </a>
+            ·
+            <a href="/{{ current_page + 1 }}"> Next </a></div>
         <div class="clearfix"></div>
     </div>
     <br/> {% for photo in photo_list %}
     <div class="image"><img src="{{ url_for('static', filename='photos/' + photo[0]|string +'.JPG') }}">
         <h3 class="directLink"><span> <a
-                href="{{ url_for('static', filename='photos/' + photo[0]|string +'.JPG') }}"># {{ photo[0]|string }}</a> </span>
+                href="p/{{ photo[0]|string }}"># {{ photo[0]|string }}</a> </span>
         </h3></div>
 {% endfor %}
     <footer>
         <hr/>
-        Copyright Sokol Saiti
+        &copy; Sokol Saiti
     </footer>
 
 {% endblock %}

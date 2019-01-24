@@ -1,7 +1,7 @@
 import os
 import sqlite3
 
-from flask import Flask, g, render_template, send_from_directory, redirect
+from flask import Flask, g, render_template, send_from_directory, redirect, abort
 
 DATABASE = 'photo_repository.db'
 BASE_URL = 'http://photos.sokol.saiti.io'
@@ -28,12 +28,25 @@ def send_css(path):
 
 @app.route('/')
 @app.route('/<int:page>')
-def hello_world(page=1):
+def index(page=1):
     photos = get_photos(page_size=PAGE_SIZE, page=page - 1)
+    previous_page = False
+    if page > 1:
+        previous_page = True
     if len(photos) > 0:
-        return render_template('index.html', base_url=BASE_URL, photo_list=photos)
+        return render_template('index.html', base_url=BASE_URL, photo_list=photos, current_page=page,
+                               has_previous_page=previous_page)
     else:
         return redirect('/')
+
+
+@app.route('/p/<int:photo_id>')
+def single_photo(photo_id=-1):
+    photo = get_photo(photo_id)
+    if len(photo) > 0:
+        return render_template('single.html', base_url=BASE_URL, photo_list=photo)
+    else:
+        abort(404)
 
 
 @app.errorhandler(404)
@@ -80,6 +93,13 @@ def get_photos(page_size, page):
         cursor.close()
         return result
 
+
+def get_photo(id):
+    with app.app_context():
+        cursor = get_db().execute("SELECT file_id,datetime_added FROM photos WHERE file_id = ?", (id,))
+        result = cursor.fetchall()
+        cursor.close()
+        return result
 
 def uncollect_uploads():
     uploaded_files = os.listdir(PHOTO_DIR)
