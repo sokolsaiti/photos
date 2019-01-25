@@ -1,5 +1,6 @@
 import os
 import sqlite3
+from datetime import datetime
 
 from flask import Flask, g, render_template, send_from_directory, redirect, abort
 
@@ -9,6 +10,11 @@ app = Flask(__name__)
 
 if not os.path.exists(UPLOAD_DIR):
     os.makedirs(UPLOAD_DIR)
+
+
+@app.context_processor
+def inject_template_constants():
+    return dict(web_page_title=WEB_PAGE_TITLE, base_url=BASE_URL, current_datetime=datetime.now())
 
 
 @app.route('/static/img/<path:path>')
@@ -29,7 +35,7 @@ def index(page=1):
     if page > 1:
         previous_page = True
     if len(photos) > 0:
-        return render_template('index.html', web_page_title=WEB_PAGE_TITLE, base_url=BASE_URL, photo_list=photos,
+        return render_template('index.html', photo_list=photos,
                                current_page=page,
                                has_previous_page=previous_page)
     else:
@@ -40,7 +46,7 @@ def index(page=1):
 def single_photo(photo_id=-1):
     photo = get_photo(photo_id)
     if len(photo) > 0:
-        return render_template('single.html', web_page_title=WEB_PAGE_TITLE, base_url=BASE_URL, photo_list=photo)
+        return render_template('single.html', photo_list=photo)
     else:
         abort(404)
 

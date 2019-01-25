@@ -27,7 +27,7 @@ a, a:visited {
 
 
 .directLink {
-    font-size: 10px;
+    font-size: 0.7em;
     bottom: -5px;
     left: 0px;
     width: 100%;
@@ -46,8 +46,9 @@ a, a:visited {
 
 .title {
     float: left;
-    font-size: 25px;
+    font-size: 1.4em;
     font-weight: bold;
+    color: rgba(246, 197, 0, 0.7);
 }
 
 .pager {
