@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div><span class="title">Sokol Saiti • Photos</span>
+    <div><span class="title">{{ web_page_title }}</span>
         <div class="pager">
             <a href="/"> Home </a>
 
@@ -18,6 +18,10 @@
             </h3>
         </div>
     {% endfor %}
+
+    <div id="infobox">
+        <p>Sample information</p>
+    </div>
 
     <footer>
         <hr/>

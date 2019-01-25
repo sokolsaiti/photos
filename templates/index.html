@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div id="head"><span class="title">Sokol Saiti • Photos</span>
+    <div id="head"><span class="title">{{ web_page_title }}</span>
         <div class="pager">
             {% if has_previous_page %}
-                <a href="/{{ current_page - 1 }}"> Previous </a>
-            {% else %}
-                <a href=""> Previous </a>
+                <a href="/{{ current_page - 1 }}">Previous</a>·
             {% endif %}
-            ·
-            <a href="/"> Home </a>
-            ·
-            <a href="/{{ current_page + 1 }}"> Next </a></div>
+            <a href="/">Home</a>·<a href="/{{ current_page + 1 }}">Next</a></div>
         <div class="clearfix"></div>
     </div>
     <br/> {% for photo in photo_list %}

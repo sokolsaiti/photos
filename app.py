@@ -3,7 +3,7 @@ import sqlite3
 
 from flask import Flask, g, render_template, send_from_directory, redirect, abort
 
-from conf.settings import UPLOAD_DIR, PAGE_SIZE, BASE_URL, DATABASE, PHOTO_DIR
+from conf.settings import UPLOAD_DIR, ENTRIES_PAGE_SIZE, BASE_URL, DATABASE, PHOTO_DIR, WEB_PAGE_TITLE
 
 app = Flask(__name__)
 
@@ -24,12 +24,13 @@ def send_css(path):
 @app.route('/')
 @app.route('/<int:page>')
 def index(page=1):
-    photos = get_photos(page_size=PAGE_SIZE, page=page - 1)
+    photos = get_photos(page_size=ENTRIES_PAGE_SIZE, page=page - 1)
     previous_page = False
     if page > 1:
         previous_page = True
     if len(photos) > 0:
-        return render_template('index.html', base_url=BASE_URL, photo_list=photos, current_page=page,
+        return render_template('index.html', web_page_title=WEB_PAGE_TITLE, base_url=BASE_URL, photo_list=photos,
+                               current_page=page,
                                has_previous_page=previous_page)
     else:
         return redirect('/')
@@ -39,7 +40,7 @@ def index(page=1):
 def single_photo(photo_id=-1):
     photo = get_photo(photo_id)
     if len(photo) > 0:
-        return render_template('single.html', base_url=BASE_URL, photo_list=photo)
+        return render_template('single.html', web_page_title=WEB_PAGE_TITLE, base_url=BASE_URL, photo_list=photo)
     else:
         abort(404)
 

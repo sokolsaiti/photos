@@ -2,6 +2,16 @@
 
 {% block content %}
 
+    <div><span class="title">{{ web_page_title }}</span>
+        <div class="pager">
+            <a href="/"> Home </a>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <br/>
+
     <div class="image kujeti">
         <img src="{{ url_for('static', filename='img/kujeti.gif') }}"/>
 
