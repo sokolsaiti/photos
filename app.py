@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from datetime import datetime
-
+from PIL import Image
 from flask import Flask, g, render_template, send_from_directory, redirect, abort
 
 from conf.settings import UPLOAD_DIR, ENTRIES_PAGE_SIZE, BASE_URL, DATABASE, PHOTO_DIR, WEB_PAGE_TITLE
@@ -84,6 +84,13 @@ def collect_uploads():
         for file in uploaded_files:
             file_id = insert_photo(file)
             os.rename(UPLOAD_DIR + '/' + file, PHOTO_DIR + '/' + str(file_id) + '.JPG')
+            resize_photo(str(file_id) + '.JPG', PHOTO_DIR)
+
+
+def resize_photo(file_name, file_dir):
+    img = Image.open(file_dir + '/' + str(file_name))
+    img = img.resize((1080, 1080), Image.ANTIALIAS)
+    img.save(file_dir + '/' + str(file_name), quality=80)
 
 
 def get_photos(page_size, page):
