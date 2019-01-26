@@ -88,3 +88,7 @@ hr {
 .kujeti {
     margin: auto;
 }
+
+#github {
+    float: right;
+}
